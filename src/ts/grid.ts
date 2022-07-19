@@ -1,6 +1,7 @@
 import { CELL_COLOR_HOVER_OFF, CELL_COLOR_HOVER_ON, CELL_COLOR_ON } from "./constants";
-import { getContext, getIndex, initializeData } from "./helpers";
-import { Cell, Data } from "./types";
+import { getContext, getIndex } from "./helpers";
+import { createNewCells, initializeData } from "./data";
+import { Cell, Data, Row } from "./types";
 
 export class Grid {
     canvas: HTMLCanvasElement;
@@ -46,9 +47,22 @@ export class Grid {
     }
 
     turn() {
-        const currentRows = Object.keys(this.data);
-        console.log(currentRows);
-        // Pass
+        const initialRows = Object.keys(this.data).map((x) => parseInt(x));
+        const initialCols = Object.keys(this.data[0] as Row).map((x) => parseInt(x));
+
+        createNewCells(this.data, initialRows, initialCols);
+
+        const transitions = [];
+
+        initialRows.forEach((rowIndex) => {
+            const row = this.data[rowIndex] as Row;
+
+            Object.keys(row).forEach((colIndex) => {
+                const cell = row[colIndex] as Cell;
+
+                // Get Next state
+            });
+        });
     }
 
     getCellByOffset(offsetY: number, offsetX: number): Cell {

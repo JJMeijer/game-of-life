@@ -1,5 +1,3 @@
-import { Cell, Data, Row } from "./types";
-
 export const getCanvas = (): HTMLCanvasElement => {
     const canvas = document.getElementById("grid");
 
@@ -18,35 +16,6 @@ export const getContext = (canvas: HTMLCanvasElement): CanvasRenderingContext2D 
     }
 
     return context;
-};
-
-export const initializeData = (height: number, width: number, xCells: number, yCells: number): Data => {
-    const data: Data = {};
-
-    const cellHeight = height / yCells;
-    const cellWidth = width / xCells;
-
-    for (let i = 0; i < yCells; i++) {
-        const row: Row = {};
-
-        for (let j = 0; j < xCells; j++) {
-            const cell: Cell = {
-                active: false,
-                x: j * cellWidth,
-                y: i * cellHeight,
-                w: cellWidth,
-                h: cellHeight,
-                row: i,
-                col: j,
-            };
-
-            row[j] = cell;
-        }
-
-        data[i] = row;
-    }
-
-    return data;
 };
 
 export const getIndex = (size: number, cells: number, point: number): number => {
