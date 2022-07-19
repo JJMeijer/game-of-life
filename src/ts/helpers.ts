@@ -21,13 +21,13 @@ export const getContext = (canvas: HTMLCanvasElement): CanvasRenderingContext2D 
 };
 
 export const initializeData = (height: number, width: number, xCells: number, yCells: number): Data => {
-    const data: Data = [];
+    const data: Data = {};
 
     const cellHeight = height / yCells;
     const cellWidth = width / xCells;
 
     for (let i = 0; i < yCells; i++) {
-        const row: Row = [];
+        const row: Row = {};
 
         for (let j = 0; j < xCells; j++) {
             const cell: Cell = {
@@ -36,12 +36,14 @@ export const initializeData = (height: number, width: number, xCells: number, yC
                 y: i * cellHeight,
                 w: cellWidth,
                 h: cellHeight,
+                row: i,
+                col: j,
             };
 
-            row.push(cell);
+            row[j] = cell;
         }
 
-        data.push(row);
+        data[i] = row;
     }
 
     return data;

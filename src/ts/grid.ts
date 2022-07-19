@@ -14,6 +14,8 @@ export class Grid {
 
     currentHover: Cell | undefined = undefined;
 
+    loop = 0;
+
     readonly data: Data;
 
     constructor(canvas: HTMLCanvasElement, xCells: number, yCells: number) {
@@ -30,6 +32,23 @@ export class Grid {
         this.setMouseMoveListener();
         this.setMouseLeaveListener();
         this.setMouseClickListener();
+        this.setStartButtonListener();
+    }
+
+    start() {
+        this.loop = setInterval(() => {
+            this.turn();
+        }, 1000);
+    }
+
+    stop() {
+        clearInterval(this.loop);
+    }
+
+    turn() {
+        const currentRows = Object.keys(this.data);
+        console.log(currentRows);
+        // Pass
     }
 
     getCellByOffset(offsetY: number, offsetX: number): Cell {
@@ -80,7 +99,7 @@ export class Grid {
         this.canvas.addEventListener("mousemove", (event) => {
             const { offsetX, offsetY } = event;
 
-            if (offsetY < 0 || offsetY > this.height || offsetX < 0 || offsetX > this.width) {
+            if (offsetY <= 0 || offsetY >= this.height || offsetX <= 0 || offsetX >= this.width) {
                 return;
             }
 
@@ -121,6 +140,28 @@ export class Grid {
             } else {
                 this.activateCell(cell);
                 cell.active = true;
+            }
+        });
+    }
+
+    setStartButtonListener(): void {
+        const startButtonElement = document.getElementById("start");
+
+        if (!(startButtonElement instanceof HTMLButtonElement)) {
+            throw new Error("Button element unexpectedly missing");
+        }
+
+        startButtonElement.addEventListener("click", () => {
+            if (startButtonElement.value === "start") {
+                this.start();
+
+                startButtonElement.value = "stop";
+                startButtonElement.innerText = "Stop";
+            } else {
+                this.stop();
+
+                startButtonElement.value = "start";
+                startButtonElement.innerText = "Start";
             }
         });
     }

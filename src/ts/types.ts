@@ -4,7 +4,14 @@ export interface Cell {
     y: number;
     w: number;
     h: number;
+    row: number;
+    col: number;
 }
 
-export type Row = Cell[];
-export type Data = Row[];
+export interface Row {
+    [key: string]: Cell;
+}
+
+export interface Data {
+    [key: string]: Row;
+}
