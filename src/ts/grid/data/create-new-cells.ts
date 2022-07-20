@@ -1,51 +1,6 @@
-import { Cell, Data, Row } from "./types";
+import { Data, Row, Cell } from "../../types";
 
-export const initializeData = (height: number, width: number, xCells: number, yCells: number): Data => {
-    const data: Data = {};
-
-    const cellHeight = height / yCells;
-    const cellWidth = width / xCells;
-
-    for (let i = 0; i < yCells; i++) {
-        const row: Row = {};
-
-        for (let j = 0; j < xCells; j++) {
-            const cell: Cell = {
-                active: false,
-                x: j * cellWidth,
-                y: i * cellHeight,
-                w: cellWidth,
-                h: cellHeight,
-                row: i,
-                col: j,
-            };
-
-            row[j] = cell;
-        }
-
-        data[i] = row;
-    }
-
-    return data;
-};
-
-export const getCellByIndex = (data: Data, rowIndex: number, colIndex: number): Cell => {
-    const row = data[rowIndex];
-
-    if (!row) {
-        throw new Error("Row unexpectedly missing");
-    }
-
-    const cell = row[colIndex];
-
-    if (!cell) {
-        throw new Error("Cell unexpectedly missing");
-    }
-
-    return cell;
-};
-
-export const getRowByIndex = (data: Data, index: number): Cell[] => {
+const getRowByIndex = (data: Data, index: number): Cell[] => {
     const row = data[index];
 
     if (!row) {
@@ -55,7 +10,7 @@ export const getRowByIndex = (data: Data, index: number): Cell[] => {
     return Object.values(row);
 };
 
-export const getColByIndex = (data: Data, index: number): Cell[] => {
+const getColByIndex = (data: Data, index: number): Cell[] => {
     const rows = Object.values(data);
 
     return rows.map((row) => {

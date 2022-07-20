@@ -8,16 +8,35 @@
     <body class="h-full">
         <div class="relative h-full w-full">
             <div class="h-full w-full flex justify-center items-center">
-                <canvas id="grid" width="400" height="400" class="border border-slate-300 cursor-pointer"></canvas>
+                <canvas id="grid" width="600" height="600" class="border border-slate-300 cursor-pointer"></canvas>
             </div>
             <div class="absolute w-full top-0 left-0 mt-8 h-12 flex flex-row justify-center items-center text-slate-300">
                 <button
                     id="start"
                     value="start"
-                    class="p-2 w-32 border-2 border-slate-500 bg-slate-600 rounded-md text-center cursor-pointer hover:bg-slate-700"
+                    class="mx-4 p-2 w-32 border-2 border-slate-500 bg-slate-600 rounded-md text-center cursor-pointer hover:bg-slate-700"
                 >
                     Start
-                </div>
+                </button>
+                <label class="mx-4" for="xCells">
+                    # Cells (X):
+                    <input
+                        type="number" id="xCells" min="10" max="100" value="25"
+                        class="bg-slate-700 text-slate-200 text-center mx-1">
+                </label>
+
+                <label class="mx-4" for="yCells">
+                    # Cells (Y):
+                    <input
+                        type="number" id="yCells" min="10" max="100" value="25"
+                        class="bg-slate-700 text-slate-200 text-center mx-1">
+                </label>
+                <button
+                    id="reset"
+                    class="mx-4 p-2 w-32 border-2 border-slate-500 bg-slate-600 rounded-md text-center cursor-pointer hover:bg-slate-700"
+                >
+                    Reset
+                </button>
             </div>
         </div>
     </body>
