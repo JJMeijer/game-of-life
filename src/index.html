@@ -7,73 +7,31 @@
     </head>
     <body class="h-full">
         <div class="relative h-full w-full">
-            <div class="h-full w-full flex justify-center items-end pb-16">
-                <canvas id="grid" width="800" height="800" class="border border-slate-300 cursor-pointer"></canvas>
+            <div class="h-full w-full flex">
+                <canvas id="grid" class="cursor-pointer"></canvas>
             </div>
-            <div class="absolute top-0 left-0 w-full flex flex-col text-slate-300">
-                <div class="w-full mt-8 h-12 flex flex-row justify-center items-center">
-                    <button
-                        id="start"
-                        value="start"
-                        class="mx-4 p-2 w-32 border-2 border-slate-500 bg-slate-600 rounded-md text-center cursor-pointer hover:bg-slate-700"
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 flex flex-row my-4 py-2 justify-center items-center text-slate-300 bg-gray-800 opacity-60 rounded-md">
+                <button
+                    id="start"
+                    value="start"
+                    class="mx-4 p-2 w-32 border-2 border-slate-500 bg-slate-600 rounded-md text-center cursor-pointer hover:bg-slate-700"
+                >
+                    Start
+                </button>
+                <label class="flex flex-col items-center w-48 mx-4" for="speed">
+                    Speed:
+                    <input
+                        class="transition-opacity duration-200 ease-in-out m-2 appearance-none bg-slate-700 h-2 w-full rounded-md opacity-70 hover:opacity-100"
+                        style="direction: rtl;"
+                        type="range" id="speed" min="100" max="2000" value="500"
                     >
-                        Start
-                    </button>
-                    <label class="mx-4" for="xCells">
-                        # Cells (X):
-                        <select
-                            class="bg-slate-700 text-slate-200 rounded-md w-12 text-center"
-                            name="xCells" id="xCells"
-                        >
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                            <option value="25" selected>25</option>
-                            <option value="30">30</option>
-                            <option value="35">35</option>
-                            <option value="40">40</option>
-                            <option value="45">45</option>
-                            <option value="50">50</option>
-                            <option value="55">55</option>
-                            <option value="60">60</option>
-                        </select>
-                    </label>
-
-                    <label class="mx-4" for="yCells">
-                        # Cells (Y):
-                        <select
-                            class="bg-slate-700 text-slate-200 rounded-md w-12 text-center"
-                            name="yCells" id="yCells"
-                        >
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                            <option value="25" selected>25</option>
-                            <option value="30">30</option>
-                            <option value="35">35</option>
-                            <option value="40">40</option>
-                            <option value="45">45</option>
-                            <option value="50">50</option>
-                            <option value="55">55</option>
-                            <option value="60">60</option>
-                        </select>
-                    </label>
-                    <button
-                        id="reset"
-                        class="mx-4 p-2 w-32 border-2 border-slate-500 bg-slate-600 rounded-md text-center cursor-pointer hover:bg-slate-700"
-                    >
-                        Reset
-                    </button>
-                </div>
-                <div class="w-full flex flex-row items-center justify-center h-12 mt-4">
-                    <label class="flex flex-col items-center w-48" for="speed">
-                        Speed:
-                        <input
-                            class="transition-opacity duration-200 ease-in-out m-2 appearance-none bg-slate-700 h-2 w-full rounded-md opacity-70 hover:opacity-100"
-                            type="range" id="speed" min="100" max="2000" value="500"
-                        >
-                    </label>
-                </div>
+                </label>
+                <button
+                    id="reset"
+                    class="mx-4 p-2 w-32 border-2 border-slate-500 bg-slate-600 rounded-md text-center cursor-pointer hover:bg-slate-700"
+                >
+                    Reset
+                </button>
             </div>
         </div>
     </body>

@@ -1,5 +1,11 @@
 import { Cell } from "./grid/data";
 
+export interface InitialCellInfo {
+    size: number;
+    xCells: number;
+    yCells: number;
+}
+
 export interface Row {
     [key: string]: Cell;
 }
@@ -9,8 +15,8 @@ export interface Data {
 }
 
 interface EventDataCoordinates {
-    rowIndex: number;
-    colIndex: number;
+    offsetX: number;
+    offsetY: number;
 }
 interface EventDataSpeed {
     speed: number;

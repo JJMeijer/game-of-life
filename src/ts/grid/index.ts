@@ -8,13 +8,23 @@ import {
     STOP,
     SPEED_CHANGE,
 } from "../constants";
-import { getContext, getSpeedSlider, getStartButton } from "../elements";
+import { getContext, getSpeedSlider, getStartButton, setCanvasSize } from "../elements";
 import { eventBus } from "../eventbus";
-import { Data, Row } from "../types";
-import { initializeData, getCellByIndex, Cell, createNewCells, getNeighbours } from "./data";
+import { Data, InitialCellInfo, Row } from "../types";
+import {
+    initializeData,
+    getCellByIndex,
+    Cell,
+    createNewCells,
+    getNeighbours,
+    calcCellSize,
+    getIndexByOffset,
+} from "./data";
 
 let data: Data;
 let ctx: CanvasRenderingContext2D;
+let initialCellInfo: InitialCellInfo;
+
 let currentHover: Cell;
 
 let mousedown = false;
@@ -24,8 +34,12 @@ let runningInterval = 0;
 let runningSpeed: number;
 
 export const initializeGrid = (): void => {
+    setCanvasSize();
+
     ctx = getContext();
-    data = initializeData(ctx);
+
+    initialCellInfo = calcCellSize();
+    data = initializeData(ctx, initialCellInfo);
 
     runningSpeed = parseInt(getSpeedSlider().value);
 };
@@ -117,7 +131,7 @@ eventBus.subscribe(RESET, () => {
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    data = initializeData(ctx);
+    data = initializeData(ctx, initialCellInfo);
 });
 
 /**
@@ -135,11 +149,16 @@ eventBus.subscribe(SPEED_CHANGE, (eventData) => {
  * CANVAS HOVER LISTENER
  */
 eventBus.subscribe(CANVAS_HOVER, (eventData) => {
-    if (!eventData || !("rowIndex" in eventData)) {
+    if (!eventData || !("offsetX" in eventData)) {
         throw new Error("Event data missing in Hover Event");
     }
 
-    const { rowIndex, colIndex } = eventData;
+    const { offsetX, offsetY } = eventData;
+    const { xCells, yCells } = initialCellInfo;
+
+    const colIndex = getIndexByOffset(ctx.canvas.width, xCells, offsetX);
+    const rowIndex = getIndexByOffset(ctx.canvas.height, yCells, offsetY);
+
     const cell = getCellByIndex(data, rowIndex, colIndex);
 
     if (!cell) {
@@ -175,19 +194,26 @@ eventBus.subscribe(CLEAR_CANVAS_HOVER, () => {
  * CANVAS MOUSEDOWN LISTENER
  */
 eventBus.subscribe(CANVAS_MOUSEDOWN, (eventData) => {
-    if (!eventData || !("rowIndex" in eventData)) {
+    if (!eventData || !("offsetX" in eventData)) {
         throw new Error("Event data missing in Hover Event");
     }
 
     mousedown = true;
 
-    const cell = getCellByIndex(data, eventData.rowIndex, eventData.colIndex);
+    const { offsetX, offsetY } = eventData;
+    const { xCells, yCells } = initialCellInfo;
+
+    const colIndex = getIndexByOffset(ctx.canvas.width, xCells, offsetX);
+    const rowIndex = getIndexByOffset(ctx.canvas.height, yCells, offsetY);
+
+    const cell = getCellByIndex(data, rowIndex, colIndex);
 
     if (!cell) {
         return;
     }
 
     cell.flip();
+    mousedownFlippedCells.push(cell);
 });
 
 /**
