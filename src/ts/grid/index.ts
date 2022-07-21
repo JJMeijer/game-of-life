@@ -8,7 +8,7 @@ import {
     STOP,
     SPEED_CHANGE,
 } from "../constants";
-import { getContext, getStartButton } from "../elements";
+import { getContext, getSpeedSlider, getStartButton } from "../elements";
 import { eventBus } from "../eventbus";
 import { Data, Row } from "../types";
 import { initializeData, getCellByIndex, Cell, createNewCells, getNeighbours } from "./data";
@@ -21,11 +21,13 @@ let mousedown = false;
 let mousedownFlippedCells: Cell[] = [];
 
 let runningInterval = 0;
-let runningSpeed = 1000;
+let runningSpeed: number;
 
 export const initializeGrid = (): void => {
     ctx = getContext();
     data = initializeData(ctx);
+
+    runningSpeed = parseInt(getSpeedSlider().value);
 };
 
 const turn = () => {
