@@ -131,6 +131,7 @@ eventBus.subscribe(RESET, () => {
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
+    initialCellInfo = calcCellSize();
     data = initializeData(ctx, initialCellInfo);
 });
 

@@ -5,6 +5,7 @@ import {
     canvasMousemoveListener,
     mouseupListener,
 } from "./canvas-listeners";
+import { cellSizeListener } from "./cell-size-listener";
 import { speedSliderListener } from "./speed-slider-listener";
 
 export const setListeners = () => {
@@ -15,4 +16,5 @@ export const setListeners = () => {
     startButtonListener();
     resetButtonListener();
     speedSliderListener();
+    cellSizeListener();
 };

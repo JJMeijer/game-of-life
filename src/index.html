@@ -23,8 +23,17 @@
                     <input
                         class="transition-opacity duration-200 ease-in-out m-2 appearance-none bg-slate-700 h-2 w-full rounded-md opacity-70 hover:opacity-100"
                         style="direction: rtl;"
-                        type="range" id="speed" min="100" max="2000" value="500"
+                        type="range" id="speed" min="100" max="1000" value="500"
                     >
+                </label>
+                <label class="flex flex-row items-center p-2" for="cellSize">
+                    Cell Size:
+                    <select id="cellSize" class="bg-slate-700 text-slate-200 mx-2 p-1 rounded-md text-center">
+                        <option value="5" selected>5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="40">40</option>>
+                    </select>
                 </label>
                 <button
                     id="reset"

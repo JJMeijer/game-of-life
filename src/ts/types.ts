@@ -22,9 +22,13 @@ interface EventDataSpeed {
     speed: number;
 }
 
+interface EventDataSize {
+    size: number;
+}
+
 type EventDataEmpty = undefined;
 
-export type EventData = EventDataCoordinates | EventDataSpeed | EventDataEmpty;
+export type EventData = EventDataCoordinates | EventDataSpeed | EventDataSize | EventDataEmpty;
 
 export interface SubscriberCallback {
     (data?: EventData): void;
