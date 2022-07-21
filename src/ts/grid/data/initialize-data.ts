@@ -1,30 +1,21 @@
 import { getCanvas, getGridSize } from "../../elements";
-import { Cell, Data, Row } from "../../types";
+import { Data, Row } from "../../types";
+import { Cell } from "./Cell";
 
-export const initializeData = (): Data => {
+export const initializeData = (ctx: CanvasRenderingContext2D): Data => {
     const { height, width } = getCanvas();
     const [xCells, yCells] = getGridSize();
 
     const data: Data = {};
 
-    const cellHeight = height / yCells;
-    const cellWidth = width / xCells;
+    const cellHeight = Math.round(height / yCells);
+    const cellWidth = Math.round(width / xCells);
 
     for (let i = 0; i < yCells; i++) {
         const row: Row = {};
 
         for (let j = 0; j < xCells; j++) {
-            const cell: Cell = {
-                active: false,
-                x: j * cellWidth,
-                y: i * cellHeight,
-                w: cellWidth,
-                h: cellHeight,
-                row: i,
-                col: j,
-            };
-
-            row[j] = cell;
+            row[j] = new Cell(ctx, j * cellWidth, i * cellHeight, cellWidth, cellHeight, i, j);
         }
 
         data[i] = row;

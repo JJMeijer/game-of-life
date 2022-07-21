@@ -1,9 +1,9 @@
 import { RESET } from "../constants";
-import { getXCellsInput, getYCellsInput } from "../elements";
+import { getXCellsSelect, getYCellsSelect } from "../elements";
 import { eventBus } from "../eventbus";
 
 export const xCellsInputListener = (): void => {
-    const xCellsInput = getXCellsInput();
+    const xCellsInput = getXCellsSelect();
 
     xCellsInput.addEventListener("change", () => {
         eventBus.publish(RESET);
@@ -11,7 +11,7 @@ export const xCellsInputListener = (): void => {
 };
 
 export const yCellsInputListener = (): void => {
-    const yCellsInput = getYCellsInput();
+    const yCellsInput = getYCellsSelect();
 
     yCellsInput.addEventListener("change", () => {
         eventBus.publish(RESET);

@@ -1,5 +1,5 @@
-import { CLEAR_CANVAS_HOVER, CANVAS_HOVER, CANVAS_CLICK } from "../constants";
-import { getCanvas, getXCellsInput, getYCellsInput } from "../elements";
+import { CLEAR_CANVAS_HOVER, CANVAS_HOVER, CANVAS_MOUSEDOWN } from "../constants";
+import { getCanvas, getXCellsSelect, getYCellsSelect } from "../elements";
 import { eventBus } from "../eventbus";
 
 const getIndex = (size: number, cells: number, point: number): number => {
@@ -17,8 +17,8 @@ export const canvasMouseleaveListener = (): void => {
 
 export const canvasMousemoveListener = (): void => {
     const canvas = getCanvas();
-    const xCellsInput = getXCellsInput();
-    const yCellsInput = getYCellsInput();
+    const xCellsInput = getXCellsSelect();
+    const yCellsInput = getYCellsSelect();
 
     canvas.addEventListener("mousemove", ({ offsetX, offsetY }) => {
         if (offsetY <= 0 || offsetY >= canvas.height || offsetX <= 0 || offsetX >= canvas.width) {
@@ -32,12 +32,12 @@ export const canvasMousemoveListener = (): void => {
     });
 };
 
-export const canvasClickListener = (): void => {
+export const canvasMousedownListener = (): void => {
     const canvas = getCanvas();
-    const xCellsInput = getXCellsInput();
-    const yCellsInput = getYCellsInput();
+    const xCellsInput = getXCellsSelect();
+    const yCellsInput = getYCellsSelect();
 
-    canvas.addEventListener("click", ({ offsetX, offsetY }) => {
+    canvas.addEventListener("mousedown", ({ offsetX, offsetY }) => {
         if (offsetY < 0 || offsetY > canvas.height || offsetX < 0 || offsetX > canvas.width) {
             return;
         }
@@ -45,6 +45,6 @@ export const canvasClickListener = (): void => {
         const rowIndex = getIndex(canvas.height, parseInt(yCellsInput.value), offsetY);
         const colIndex = getIndex(canvas.width, parseInt(xCellsInput.value), offsetX);
 
-        eventBus.publish(CANVAS_CLICK, { rowIndex, colIndex });
+        eventBus.publish(CANVAS_MOUSEDOWN, { rowIndex, colIndex });
     });
 };

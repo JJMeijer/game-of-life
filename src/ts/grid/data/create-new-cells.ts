@@ -1,4 +1,5 @@
-import { Data, Row, Cell } from "../../types";
+import { Data, Row } from "../../types";
+import { Cell } from "./Cell";
 
 const getRowByIndex = (data: Data, index: number): Cell[] => {
     const row = data[index];
@@ -31,17 +32,9 @@ export const createNewCells = (data: Data, initialRows: number[], initialCols: n
         const newRow: Row = {};
 
         firstRow.forEach((cell) => {
-            const { x, y, w, h, col, row } = cell;
+            const { x, y, w, h, col, row, ctx } = cell;
 
-            newRow[`${col}`] = {
-                active: false,
-                x,
-                y: y - h,
-                w,
-                h,
-                col,
-                row: row - 1,
-            };
+            newRow[`${col}`] = new Cell(ctx, x, y - h, w, h, row - 1, col);
         });
 
         data[firstRowIndex - 1] = newRow;
@@ -54,17 +47,9 @@ export const createNewCells = (data: Data, initialRows: number[], initialCols: n
             const row = data[rowIndex] as Row;
             const cell = row[firstColIndex] as Cell;
 
-            const { x, y, w, h, col } = cell;
+            const { x, y, w, h, col, ctx } = cell;
 
-            row[firstColIndex - 1] = {
-                active: false,
-                x: x - w,
-                y,
-                w,
-                h,
-                col: col - 1,
-                row: parseInt(rowIndex),
-            };
+            row[firstColIndex - 1] = new Cell(ctx, x - w, y, w, h, parseInt(rowIndex), col - 1);
         });
     }
 
@@ -74,17 +59,9 @@ export const createNewCells = (data: Data, initialRows: number[], initialCols: n
         const newRow: Row = {};
 
         lastRow.forEach((cell) => {
-            const { x, y, w, h, col, row } = cell;
+            const { x, y, w, h, col, row, ctx } = cell;
 
-            newRow[`${col}`] = {
-                active: false,
-                x,
-                y: y + h,
-                w,
-                h,
-                col,
-                row: row + 1,
-            };
+            newRow[`${col}`] = new Cell(ctx, x, y + h, w, h, row + 1, col);
         });
 
         data[lastRowIndex + 1] = newRow;
@@ -97,17 +74,9 @@ export const createNewCells = (data: Data, initialRows: number[], initialCols: n
             const row = data[rowIndex] as Row;
             const cell = row[lastColIndex] as Cell;
 
-            const { x, y, w, h, col } = cell;
+            const { x, y, w, h, col, ctx } = cell;
 
-            row[lastColIndex + 1] = {
-                active: false,
-                x: x + w,
-                y,
-                w,
-                h,
-                col: col + 1,
-                row: parseInt(rowIndex),
-            };
+            row[lastColIndex + 1] = new Cell(ctx, x + w, y, w, h, parseInt(rowIndex), col + 1);
         });
     }
 };

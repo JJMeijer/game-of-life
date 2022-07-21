@@ -1,6 +1,7 @@
 import { getCellByIndex } from "./get-cell-by-index";
 
-import { Data, Cell } from "../../types";
+import { Data } from "../../types";
+import { Cell } from "./Cell";
 
 export const getNeighbours = (data: Data, cell: Cell): number => {
     const { row, col } = cell;

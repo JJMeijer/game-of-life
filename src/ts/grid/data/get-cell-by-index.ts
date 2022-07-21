@@ -1,4 +1,5 @@
-import { Data, Cell } from "../../types";
+import { Data } from "../../types";
+import { Cell } from "./Cell";
 
 export const getCellByIndex = (data: Data, rowIndex: number, colIndex: number): Cell | null => {
     const row = data[rowIndex];

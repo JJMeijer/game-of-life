@@ -1,9 +1,9 @@
-import { getXCellsInput } from "./get-x-cells-input";
-import { getYCellsInput } from "./get-y-cells-input";
+import { getXCellsSelect } from "./get-x-cells-select";
+import { getYCellsSelect } from "./get-y-cells-select";
 
 export const getGridSize = (): [number, number] => {
-    const cellsXInput = getXCellsInput();
-    const cellsYInput = getYCellsInput();
+    const cellsXInput = getXCellsSelect();
+    const cellsYInput = getYCellsSelect();
 
     return [parseInt(cellsXInput.value), parseInt(cellsYInput.value)];
 };
