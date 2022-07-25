@@ -1,6 +1,6 @@
 # Game Of Life Prototype
 
-Canvas based Game of Life prototype. Click on Cells, or drag over cells to create a starting pattern. Click on start to start the simulation. Demo available at [https://jjmeijer.github.io/game-of-life/](jjmeijer.github.io/game-of-life/)
+Canvas based Game of Life prototype. Click on Cells, or drag over cells to create a starting pattern. Click on start to start the simulation. Demo available at https://jjmeijer.github.io/game-of-life/
 
 ## Install
 ```bash
