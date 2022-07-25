@@ -6,6 +6,8 @@
     "license": "MIT",
     "scripts": {
         "serve": "live-server --no-browser --host=localhost --port=8000 www",
+        "trash": "trash www",
+        "build": "yarn trash && yarn static:copy && yarn js:build && yarn css:build",
         "static:copy": "cpy src/index.html www --flat",
         "static:watch": "nodemon -w src/index.html --exec yarn static:copy",
         "js:watch": "node esbuild.js watch",
